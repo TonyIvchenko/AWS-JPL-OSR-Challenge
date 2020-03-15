@@ -1,0 +1,35 @@
+{
+  "agent": "random",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": -47.88,
+    "avg_steps": 24.18,
+    "episodes": 50.0,
+    "max_reward": -29.0,
+    "min_reward": -94.0,
+    "success_rate": 0.0
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 0.0,
+    "avg_steps": 0.0,
+    "episodes": 0.0,
+    "max_reward": 0.0,
+    "min_reward": 0.0,
+    "success_rate": 0.0
+  }
+}
