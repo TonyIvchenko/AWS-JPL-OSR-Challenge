@@ -20,3 +20,4 @@ Results are written as JSON to `offline_experiments/results/`.
 
 - `random`
 - `q_learning`
+- `sarsa`

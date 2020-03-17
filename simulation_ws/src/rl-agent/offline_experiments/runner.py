@@ -14,19 +14,32 @@ def _run_episode(env: RoverMiniGridEnv, agent, training: bool) -> Dict[str, floa
     done = False
     total_reward = 0.0
     event = ""
+    state_idx = env.state_to_index(state)
+    action = agent.choose_action(state_idx, training=training)
 
     while not done:
-        state_idx = env.state_to_index(state)
-        action = agent.choose_action(state_idx, training=training)
         step = env.step(action)
         next_state_idx = env.state_to_index(step.state)
-        agent.observe(state_idx, action, step.reward, next_state_idx, step.done)
+        next_action = None
+        if not step.done:
+            next_action = agent.choose_action(next_state_idx, training=training)
+        agent.observe(
+            state_idx,
+            action,
+            step.reward,
+            next_state_idx,
+            step.done,
+            next_action=next_action,
+        )
 
         state = step.state
         done = step.done
         total_reward += step.reward
         if done:
             event = step.info.get("event", "")
+        else:
+            state_idx = next_state_idx
+            action = next_action
 
     return {
         "reward": total_reward,
