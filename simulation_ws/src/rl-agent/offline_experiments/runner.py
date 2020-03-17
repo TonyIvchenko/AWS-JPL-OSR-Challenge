@@ -59,7 +59,12 @@ def run_experiment(
     slip_probability: float,
 ) -> Dict[str, object]:
     env = RoverMiniGridEnv(seed=seed, slip_probability=slip_probability)
-    agent = build_agent(agent_name=agent_name, num_actions=env.num_actions, seed=seed)
+    agent = build_agent(
+        agent_name=agent_name,
+        num_actions=env.num_actions,
+        num_states=env.num_states(),
+        seed=seed,
+    )
 
     train_rows = []
     for _ in range(train_episodes):

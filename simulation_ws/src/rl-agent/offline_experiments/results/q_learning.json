@@ -1,0 +1,35 @@
+{
+  "agent": "q_learning",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 29.25,
+    "avg_steps": 21.0,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -34.0,
+    "success_rate": 0.99
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 4.14,
+    "avg_steps": 29.21,
+    "episodes": 1200.0,
+    "max_reward": 33.0,
+    "min_reward": -102.0,
+    "success_rate": 0.76
+  }
+}

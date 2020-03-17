@@ -15,3 +15,8 @@ python3 offline_experiments/run_experiment.py \
 ```
 
 Results are written as JSON to `offline_experiments/results/`.
+
+## Agent Options
+
+- `random`
+- `q_learning`
