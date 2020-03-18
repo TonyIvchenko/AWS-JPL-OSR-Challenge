@@ -23,14 +23,15 @@ def _run_episode(env: RoverMiniGridEnv, agent, training: bool) -> Dict[str, floa
         next_action = None
         if not step.done:
             next_action = agent.choose_action(next_state_idx, training=training)
-        agent.observe(
-            state_idx,
-            action,
-            step.reward,
-            next_state_idx,
-            step.done,
-            next_action=next_action,
-        )
+        if training:
+            agent.observe(
+                state_idx,
+                action,
+                step.reward,
+                next_state_idx,
+                step.done,
+                next_action=next_action,
+            )
 
         state = step.state
         done = step.done
