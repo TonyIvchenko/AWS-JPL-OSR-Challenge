@@ -202,6 +202,65 @@ class ExpectedSarsaAgent:
         self.q_table[state_idx][action] = current_q + self.alpha * (td_target - current_q)
 
 
+class MonteCarloControlAgent:
+    """On-policy Monte Carlo control with epsilon-greedy policy improvement."""
+
+    def __init__(
+        self,
+        num_states: int,
+        num_actions: int,
+        seed: int = 0,
+        gamma: float = 0.98,
+        epsilon: float = 0.2,
+    ) -> None:
+        self.num_states = num_states
+        self.num_actions = num_actions
+        self.gamma = gamma
+        self.epsilon = epsilon
+        self.rng = random.Random(seed)
+        self.q_table: List[List[float]] = [
+            [0.0 for _ in range(num_actions)] for _ in range(num_states)
+        ]
+        self.returns_count: List[List[int]] = [
+            [0 for _ in range(num_actions)] for _ in range(num_states)
+        ]
+        self.episode: List[tuple[int, int, float]] = []
+
+    def _argmax_action(self, values: List[float]) -> int:
+        max_value = max(values)
+        max_actions = [i for i, value in enumerate(values) if value == max_value]
+        return self.rng.choice(max_actions)
+
+    def choose_action(self, state_idx: int, training: bool) -> int:
+        if training and self.rng.random() < self.epsilon:
+            return self.rng.randrange(self.num_actions)
+        return self._argmax_action(self.q_table[state_idx])
+
+    def _update_from_episode(self) -> None:
+        g_return = 0.0
+        for state_idx, action, reward in reversed(self.episode):
+            g_return = reward + (self.gamma * g_return)
+            count = self.returns_count[state_idx][action] + 1
+            self.returns_count[state_idx][action] = count
+            current = self.q_table[state_idx][action]
+            self.q_table[state_idx][action] = current + ((g_return - current) / count)
+        self.episode.clear()
+
+    def observe(
+        self,
+        state_idx: int,
+        action: int,
+        reward: float,
+        next_state_idx: int,
+        done: bool,
+        next_action: int | None = None,
+    ) -> None:
+        del next_state_idx, next_action
+        self.episode.append((state_idx, action, reward))
+        if done:
+            self._update_from_episode()
+
+
 def build_agent(
     agent_name: str, num_actions: int, num_states: int, seed: int = 0
 ) -> Agent:
@@ -221,6 +280,12 @@ def build_agent(
         )
     if agent_name == "expected_sarsa":
         return ExpectedSarsaAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+        )
+    if agent_name == "monte_carlo_control":
+        return MonteCarloControlAgent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
