@@ -23,3 +23,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `sarsa`
 - `expected_sarsa`
 - `monte_carlo_control`
+- `double_q_learning`

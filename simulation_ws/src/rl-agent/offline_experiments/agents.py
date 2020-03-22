@@ -261,6 +261,68 @@ class MonteCarloControlAgent:
             self._update_from_episode()
 
 
+class DoubleQLearningAgent:
+    """Double Q-learning with epsilon-greedy action selection on Q1+Q2."""
+
+    def __init__(
+        self,
+        num_states: int,
+        num_actions: int,
+        seed: int = 0,
+        alpha: float = 0.2,
+        gamma: float = 0.98,
+        epsilon: float = 0.2,
+    ) -> None:
+        self.num_states = num_states
+        self.num_actions = num_actions
+        self.alpha = alpha
+        self.gamma = gamma
+        self.epsilon = epsilon
+        self.rng = random.Random(seed)
+        self.q1: List[List[float]] = [
+            [0.0 for _ in range(num_actions)] for _ in range(num_states)
+        ]
+        self.q2: List[List[float]] = [
+            [0.0 for _ in range(num_actions)] for _ in range(num_states)
+        ]
+
+    def _combined_values(self, state_idx: int) -> List[float]:
+        return [self.q1[state_idx][a] + self.q2[state_idx][a] for a in range(self.num_actions)]
+
+    def _argmax_action(self, values: List[float]) -> int:
+        max_value = max(values)
+        max_actions = [i for i, value in enumerate(values) if value == max_value]
+        return self.rng.choice(max_actions)
+
+    def choose_action(self, state_idx: int, training: bool) -> int:
+        if training and self.rng.random() < self.epsilon:
+            return self.rng.randrange(self.num_actions)
+        return self._argmax_action(self._combined_values(state_idx))
+
+    def observe(
+        self,
+        state_idx: int,
+        action: int,
+        reward: float,
+        next_state_idx: int,
+        done: bool,
+        next_action: int | None = None,
+    ) -> None:
+        del next_action
+        if self.rng.random() < 0.5:
+            next_action_idx = self._argmax_action(self.q1[next_state_idx])
+            bootstrap = 0.0 if done else self.q2[next_state_idx][next_action_idx]
+            current = self.q1[state_idx][action]
+            td_target = reward + (self.gamma * bootstrap)
+            self.q1[state_idx][action] = current + self.alpha * (td_target - current)
+        else:
+            next_action_idx = self._argmax_action(self.q2[next_state_idx])
+            bootstrap = 0.0 if done else self.q1[next_state_idx][next_action_idx]
+            current = self.q2[state_idx][action]
+            td_target = reward + (self.gamma * bootstrap)
+            self.q2[state_idx][action] = current + self.alpha * (td_target - current)
+
+
 def build_agent(
     agent_name: str, num_actions: int, num_states: int, seed: int = 0
 ) -> Agent:
@@ -286,6 +348,12 @@ def build_agent(
         )
     if agent_name == "monte_carlo_control":
         return MonteCarloControlAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+        )
+    if agent_name == "double_q_learning":
+        return DoubleQLearningAgent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
