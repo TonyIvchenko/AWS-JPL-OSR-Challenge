@@ -323,6 +323,82 @@ class DoubleQLearningAgent:
             self.q2[state_idx][action] = current + self.alpha * (td_target - current)
 
 
+class DynaQAgent:
+    """Dyna-Q with tabular model rollouts for planning updates."""
+
+    def __init__(
+        self,
+        num_states: int,
+        num_actions: int,
+        seed: int = 0,
+        alpha: float = 0.2,
+        gamma: float = 0.98,
+        epsilon: float = 0.2,
+        planning_steps: int = 10,
+    ) -> None:
+        self.num_states = num_states
+        self.num_actions = num_actions
+        self.alpha = alpha
+        self.gamma = gamma
+        self.epsilon = epsilon
+        self.planning_steps = planning_steps
+        self.rng = random.Random(seed)
+        self.q_table: List[List[float]] = [
+            [0.0 for _ in range(num_actions)] for _ in range(num_states)
+        ]
+        self.model: dict[tuple[int, int], tuple[float, int, bool]] = {}
+
+    def _argmax_action(self, values: List[float]) -> int:
+        max_value = max(values)
+        max_actions = [i for i, value in enumerate(values) if value == max_value]
+        return self.rng.choice(max_actions)
+
+    def choose_action(self, state_idx: int, training: bool) -> int:
+        if training and self.rng.random() < self.epsilon:
+            return self.rng.randrange(self.num_actions)
+        return self._argmax_action(self.q_table[state_idx])
+
+    def _q_learning_update(
+        self,
+        state_idx: int,
+        action: int,
+        reward: float,
+        next_state_idx: int,
+        done: bool,
+    ) -> None:
+        current_q = self.q_table[state_idx][action]
+        best_next_q = max(self.q_table[next_state_idx])
+        td_target = reward + (0.0 if done else self.gamma * best_next_q)
+        self.q_table[state_idx][action] = current_q + self.alpha * (td_target - current_q)
+
+    def observe(
+        self,
+        state_idx: int,
+        action: int,
+        reward: float,
+        next_state_idx: int,
+        done: bool,
+        next_action: int | None = None,
+    ) -> None:
+        del next_action
+        self._q_learning_update(state_idx, action, reward, next_state_idx, done)
+        self.model[(state_idx, action)] = (reward, next_state_idx, done)
+
+        if not self.model:
+            return
+        keys = list(self.model.keys())
+        for _ in range(self.planning_steps):
+            replay_state, replay_action = self.rng.choice(keys)
+            replay_reward, replay_next_state, replay_done = self.model[(replay_state, replay_action)]
+            self._q_learning_update(
+                replay_state,
+                replay_action,
+                replay_reward,
+                replay_next_state,
+                replay_done,
+            )
+
+
 def build_agent(
     agent_name: str, num_actions: int, num_states: int, seed: int = 0
 ) -> Agent:
@@ -354,6 +430,12 @@ def build_agent(
         )
     if agent_name == "double_q_learning":
         return DoubleQLearningAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+        )
+    if agent_name == "dyna_q":
+        return DynaQAgent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
