@@ -26,3 +26,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `double_q_learning`
 - `dyna_q`
 - `actor_critic`
+- `reinforce`
