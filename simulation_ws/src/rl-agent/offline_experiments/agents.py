@@ -561,6 +561,93 @@ class ReinforceAgent:
             self._update_from_episode()
 
 
+class DQNAgent:
+    """Tabular DQN-style learner with replay sampling and target table sync."""
+
+    def __init__(
+        self,
+        num_states: int,
+        num_actions: int,
+        seed: int = 0,
+        alpha: float = 0.2,
+        gamma: float = 0.98,
+        epsilon_start: float = 0.3,
+        epsilon_end: float = 0.05,
+        epsilon_decay: float = 0.9995,
+        replay_capacity: int = 4000,
+        batch_size: int = 32,
+        target_update_steps: int = 200,
+    ) -> None:
+        self.num_states = num_states
+        self.num_actions = num_actions
+        self.alpha = alpha
+        self.gamma = gamma
+        self.epsilon = epsilon_start
+        self.epsilon_end = epsilon_end
+        self.epsilon_decay = epsilon_decay
+        self.replay_capacity = replay_capacity
+        self.batch_size = batch_size
+        self.target_update_steps = target_update_steps
+        self.rng = random.Random(seed)
+        self.online_q: List[List[float]] = [
+            [0.0 for _ in range(num_actions)] for _ in range(num_states)
+        ]
+        self.target_q: List[List[float]] = [
+            [0.0 for _ in range(num_actions)] for _ in range(num_states)
+        ]
+        self.replay: List[tuple[int, int, float, int, bool]] = []
+        self.step_count = 0
+
+    def _argmax_action(self, values: List[float]) -> int:
+        max_value = max(values)
+        max_actions = [i for i, value in enumerate(values) if value == max_value]
+        return self.rng.choice(max_actions)
+
+    def choose_action(self, state_idx: int, training: bool) -> int:
+        if training and self.rng.random() < self.epsilon:
+            return self.rng.randrange(self.num_actions)
+        return self._argmax_action(self.online_q[state_idx])
+
+    def _remember(self, transition: tuple[int, int, float, int, bool]) -> None:
+        self.replay.append(transition)
+        if len(self.replay) > self.replay_capacity:
+            self.replay.pop(0)
+
+    def _sample_batch(self) -> List[tuple[int, int, float, int, bool]]:
+        batch_size = min(self.batch_size, len(self.replay))
+        return self.rng.sample(self.replay, batch_size)
+
+    def _update_from_batch(self, batch: List[tuple[int, int, float, int, bool]]) -> None:
+        for state_idx, action, reward, next_state_idx, done in batch:
+            current_q = self.online_q[state_idx][action]
+            next_q = max(self.target_q[next_state_idx])
+            td_target = reward + (0.0 if done else self.gamma * next_q)
+            self.online_q[state_idx][action] = current_q + self.alpha * (td_target - current_q)
+
+    def _sync_target(self) -> None:
+        self.target_q = [row[:] for row in self.online_q]
+
+    def observe(
+        self,
+        state_idx: int,
+        action: int,
+        reward: float,
+        next_state_idx: int,
+        done: bool,
+        next_action: int | None = None,
+    ) -> None:
+        del next_action
+        self.step_count += 1
+        self._remember((state_idx, action, reward, next_state_idx, done))
+        batch = self._sample_batch()
+        self._update_from_batch(batch)
+
+        self.epsilon = max(self.epsilon_end, self.epsilon * self.epsilon_decay)
+
+        if self.step_count % self.target_update_steps == 0:
+            self._sync_target()
+
+
 def build_agent(
     agent_name: str, num_actions: int, num_states: int, seed: int = 0
 ) -> Agent:
@@ -610,6 +697,12 @@ def build_agent(
         )
     if agent_name == "reinforce":
         return ReinforceAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+        )
+    if agent_name == "dqn":
+        return DQNAgent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,

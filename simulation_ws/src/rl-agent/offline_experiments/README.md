@@ -27,3 +27,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `dyna_q`
 - `actor_critic`
 - `reinforce`
+- `dqn`
