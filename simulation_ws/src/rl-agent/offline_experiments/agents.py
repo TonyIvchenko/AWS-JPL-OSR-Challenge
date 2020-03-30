@@ -648,6 +648,18 @@ class DQNAgent:
             self._sync_target()
 
 
+class DoubleDQNAgent(DQNAgent):
+    """Double DQN variant with decoupled action selection/evaluation."""
+
+    def _update_from_batch(self, batch: List[tuple[int, int, float, int, bool]]) -> None:
+        for state_idx, action, reward, next_state_idx, done in batch:
+            current_q = self.online_q[state_idx][action]
+            next_action = self._argmax_action(self.online_q[next_state_idx])
+            next_q = self.target_q[next_state_idx][next_action]
+            td_target = reward + (0.0 if done else self.gamma * next_q)
+            self.online_q[state_idx][action] = current_q + self.alpha * (td_target - current_q)
+
+
 def build_agent(
     agent_name: str, num_actions: int, num_states: int, seed: int = 0
 ) -> Agent:
@@ -703,6 +715,12 @@ def build_agent(
         )
     if agent_name == "dqn":
         return DQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+        )
+    if agent_name == "double_dqn":
+        return DoubleDQNAgent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
