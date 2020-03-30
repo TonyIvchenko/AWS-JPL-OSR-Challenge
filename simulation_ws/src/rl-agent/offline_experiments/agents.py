@@ -725,5 +725,15 @@ def build_agent(
             num_actions=num_actions,
             seed=seed,
         )
+    if agent_name == "dueling_dqn":
+        return DQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.15,
+            epsilon_start=0.25,
+            epsilon_end=0.03,
+            target_update_steps=150,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")

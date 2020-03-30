@@ -29,3 +29,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `reinforce`
 - `dqn`
 - `double_dqn`
+- `dueling_dqn`

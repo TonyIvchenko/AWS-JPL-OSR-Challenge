@@ -1,0 +1,35 @@
+{
+  "agent": "dueling_dqn",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 24.1,
+    "avg_steps": 20.15,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -41.0,
+    "success_rate": 0.91
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 13.81,
+    "avg_steps": 23.272142857142857,
+    "episodes": 1400.0,
+    "max_reward": 33.0,
+    "min_reward": -98.0,
+    "success_rate": 0.8135714285714286
+  }
+}
