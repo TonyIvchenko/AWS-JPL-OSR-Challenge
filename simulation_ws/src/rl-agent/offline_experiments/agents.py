@@ -735,5 +735,16 @@ def build_agent(
             epsilon_end=0.03,
             target_update_steps=150,
         )
+    if agent_name == "noisy_dqn":
+        return DQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.18,
+            epsilon_start=0.45,
+            epsilon_end=0.08,
+            epsilon_decay=0.9992,
+            target_update_steps=120,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
