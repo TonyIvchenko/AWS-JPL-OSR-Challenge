@@ -746,5 +746,18 @@ def build_agent(
             epsilon_decay=0.9992,
             target_update_steps=120,
         )
+    if agent_name == "c51":
+        return DQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.12,
+            epsilon_start=0.3,
+            epsilon_end=0.02,
+            epsilon_decay=0.9996,
+            replay_capacity=5000,
+            batch_size=48,
+            target_update_steps=220,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
