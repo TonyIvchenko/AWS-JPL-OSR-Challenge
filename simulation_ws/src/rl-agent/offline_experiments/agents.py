@@ -759,5 +759,18 @@ def build_agent(
             batch_size=48,
             target_update_steps=220,
         )
+    if agent_name == "qr_dqn":
+        return DoubleDQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.16,
+            epsilon_start=0.35,
+            epsilon_end=0.04,
+            epsilon_decay=0.9994,
+            replay_capacity=5000,
+            batch_size=40,
+            target_update_steps=180,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")

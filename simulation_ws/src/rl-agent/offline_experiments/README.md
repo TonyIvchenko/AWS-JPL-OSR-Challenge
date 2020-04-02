@@ -32,3 +32,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `dueling_dqn`
 - `noisy_dqn`
 - `c51`
+- `qr_dqn`
