@@ -1,0 +1,35 @@
+{
+  "agent": "iqn",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 28.1,
+    "avg_steps": 20.65,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -41.0,
+    "success_rate": 0.97
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 20.700666666666667,
+    "avg_steps": 22.809333333333335,
+    "episodes": 1500.0,
+    "max_reward": 33.0,
+    "min_reward": -92.0,
+    "success_rate": 0.8986666666666666
+  }
+}
