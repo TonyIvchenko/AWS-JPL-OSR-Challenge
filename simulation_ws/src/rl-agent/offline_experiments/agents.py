@@ -785,5 +785,15 @@ def build_agent(
             batch_size=48,
             target_update_steps=200,
         )
+    if agent_name == "a2c":
+        return ActorCriticAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha_policy=0.09,
+            alpha_value=0.2,
+            gamma=0.98,
+            temperature=0.9,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")

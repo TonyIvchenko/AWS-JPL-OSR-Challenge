@@ -34,3 +34,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `c51`
 - `qr_dqn`
 - `iqn`
+- `a2c`
