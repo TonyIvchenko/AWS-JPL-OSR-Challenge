@@ -795,5 +795,15 @@ def build_agent(
             gamma=0.98,
             temperature=0.9,
         )
+    if agent_name == "a3c":
+        return ActorCriticAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha_policy=0.07,
+            alpha_value=0.18,
+            gamma=0.98,
+            temperature=1.15,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
