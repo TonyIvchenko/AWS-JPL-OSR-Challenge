@@ -805,5 +805,15 @@ def build_agent(
             gamma=0.98,
             temperature=1.15,
         )
+    if agent_name == "ppo":
+        return ActorCriticAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha_policy=0.06,
+            alpha_value=0.16,
+            gamma=0.99,
+            temperature=0.85,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
