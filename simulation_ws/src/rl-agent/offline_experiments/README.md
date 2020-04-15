@@ -37,3 +37,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `a2c`
 - `a3c`
 - `ppo`
+- `trpo`

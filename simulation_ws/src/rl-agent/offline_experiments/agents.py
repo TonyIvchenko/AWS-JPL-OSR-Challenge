@@ -815,5 +815,14 @@ def build_agent(
             gamma=0.99,
             temperature=0.85,
         )
+    if agent_name == "trpo":
+        return ReinforceAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.015,
+            gamma=0.99,
+            temperature=0.9,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
