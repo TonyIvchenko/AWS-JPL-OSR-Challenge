@@ -824,5 +824,15 @@ def build_agent(
             gamma=0.99,
             temperature=0.9,
         )
+    if agent_name == "sac":
+        return ActorCriticAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha_policy=0.08,
+            alpha_value=0.14,
+            gamma=0.99,
+            temperature=1.25,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
