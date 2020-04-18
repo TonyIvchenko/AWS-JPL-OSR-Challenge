@@ -834,5 +834,18 @@ def build_agent(
             gamma=0.99,
             temperature=1.25,
         )
+    if agent_name == "ddpg":
+        return DQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.2,
+            epsilon_start=0.18,
+            epsilon_end=0.01,
+            epsilon_decay=0.9997,
+            replay_capacity=6000,
+            batch_size=48,
+            target_update_steps=160,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
