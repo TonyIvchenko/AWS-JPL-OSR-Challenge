@@ -41,3 +41,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `sac`
 - `ddpg`
 - `td3`
+- `impala`

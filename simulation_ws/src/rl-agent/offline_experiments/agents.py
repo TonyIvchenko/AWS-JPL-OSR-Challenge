@@ -860,5 +860,15 @@ def build_agent(
             batch_size=48,
             target_update_steps=150,
         )
+    if agent_name == "impala":
+        return ActorCriticAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha_policy=0.075,
+            alpha_value=0.19,
+            gamma=0.99,
+            temperature=1.05,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
