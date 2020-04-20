@@ -847,5 +847,18 @@ def build_agent(
             batch_size=48,
             target_update_steps=160,
         )
+    if agent_name == "td3":
+        return DoubleDQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.17,
+            epsilon_start=0.2,
+            epsilon_end=0.015,
+            epsilon_decay=0.9996,
+            replay_capacity=6000,
+            batch_size=48,
+            target_update_steps=150,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
