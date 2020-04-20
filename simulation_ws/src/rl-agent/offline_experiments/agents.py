@@ -870,5 +870,18 @@ def build_agent(
             gamma=0.99,
             temperature=1.05,
         )
+    if agent_name == "r2d2":
+        return DQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.13,
+            epsilon_start=0.25,
+            epsilon_end=0.02,
+            epsilon_decay=0.9997,
+            replay_capacity=8000,
+            batch_size=64,
+            target_update_steps=250,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")

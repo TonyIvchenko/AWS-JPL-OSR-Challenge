@@ -42,3 +42,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `ddpg`
 - `td3`
 - `impala`
+- `r2d2`
