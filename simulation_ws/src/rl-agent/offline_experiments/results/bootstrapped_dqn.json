@@ -1,0 +1,35 @@
+{
+  "agent": "bootstrapped_dqn",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 29.56,
+    "avg_steps": 20.69,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -29.0,
+    "success_rate": 0.99
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 13.148,
+    "avg_steps": 23.832,
+    "episodes": 1500.0,
+    "max_reward": 33.0,
+    "min_reward": -101.0,
+    "success_rate": 0.812
+  }
+}

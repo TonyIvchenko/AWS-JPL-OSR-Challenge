@@ -883,5 +883,18 @@ def build_agent(
             batch_size=64,
             target_update_steps=250,
         )
+    if agent_name == "bootstrapped_dqn":
+        return DQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.16,
+            epsilon_start=0.5,
+            epsilon_end=0.05,
+            epsilon_decay=0.9993,
+            replay_capacity=7000,
+            batch_size=56,
+            target_update_steps=220,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")

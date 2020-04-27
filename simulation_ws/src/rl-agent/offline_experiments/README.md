@@ -43,3 +43,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `td3`
 - `impala`
 - `r2d2`
+- `bootstrapped_dqn`
