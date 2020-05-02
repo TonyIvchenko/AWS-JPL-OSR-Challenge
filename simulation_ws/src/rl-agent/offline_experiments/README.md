@@ -44,3 +44,4 @@ Results are written as JSON to `offline_experiments/results/`.
 - `impala`
 - `r2d2`
 - `bootstrapped_dqn`
+- `apex_dqn`

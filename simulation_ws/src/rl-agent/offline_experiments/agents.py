@@ -896,5 +896,18 @@ def build_agent(
             batch_size=56,
             target_update_steps=220,
         )
+    if agent_name == "apex_dqn":
+        return DoubleDQNAgent(
+            num_states=num_states,
+            num_actions=num_actions,
+            seed=seed,
+            alpha=0.18,
+            epsilon_start=0.4,
+            epsilon_end=0.03,
+            epsilon_decay=0.9995,
+            replay_capacity=9000,
+            batch_size=64,
+            target_update_steps=140,
+        )
 
     raise ValueError(f"Unknown agent '{agent_name}'")
