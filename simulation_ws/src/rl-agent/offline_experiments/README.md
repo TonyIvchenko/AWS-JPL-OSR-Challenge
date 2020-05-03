@@ -16,6 +16,10 @@ python3 offline_experiments/run_experiment.py \
 
 Results are written as JSON to `offline_experiments/results/`.
 
+## Iterative Tuning
+
+Model iterations, parameter changes, and benchmark outputs are tracked in `offline_experiments/TUNING_LOG.md`.
+
 ## Agent Options
 
 - `random`
