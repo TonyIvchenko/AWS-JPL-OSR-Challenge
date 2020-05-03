@@ -731,6 +731,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
+            alpha=0.19,
+            epsilon_start=0.30,
+            epsilon_end=0.015,
+            epsilon_decay=0.9996,
+            replay_capacity=6000,
+            batch_size=56,
+            target_update_steps=160,
         )
     if agent_name == "dueling_dqn":
         return DQNAgent(

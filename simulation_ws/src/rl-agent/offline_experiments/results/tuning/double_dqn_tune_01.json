@@ -1,0 +1,35 @@
+{
+  "agent": "double_dqn",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 29.06,
+    "avg_steps": 21.19,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -35.0,
+    "success_rate": 0.99
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 17.485882352941175,
+    "avg_steps": 24.92,
+    "episodes": 1700.0,
+    "max_reward": 33.0,
+    "min_reward": -102.0,
+    "success_rate": 0.8835294117647059
+  }
+}
