@@ -809,10 +809,10 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha_policy=0.09,
-            alpha_value=0.2,
-            gamma=0.98,
-            temperature=0.9,
+            alpha_policy=0.07,
+            alpha_value=0.22,
+            gamma=0.99,
+            temperature=0.95,
         )
     if agent_name == "a3c":
         return ActorCriticAgent(
