@@ -829,10 +829,10 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha_policy=0.06,
-            alpha_value=0.16,
-            gamma=0.99,
-            temperature=0.85,
+            alpha_policy=0.055,
+            alpha_value=0.18,
+            gamma=0.995,
+            temperature=0.90,
         )
     if agent_name == "trpo":
         return ReinforceAgent(
