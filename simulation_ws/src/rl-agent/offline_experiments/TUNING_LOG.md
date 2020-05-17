@@ -12,3 +12,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 6 | qr_dqn | alpha 0.18, epsilon 0.28->0.02, decay 0.99955, replay 7000, batch 56, target sync 170 | 1700 | 18.62 | 0.86 | `results/tuning/qr_dqn_tune_01.json` |
 | 7 | iqn | alpha 0.16, epsilon 0.24->0.015, decay 0.99962, replay 7000, batch 56, target sync 180 | 1700 | -7.56 | 0.80 | `results/tuning/iqn_tune_01.json` |
 | 8 | a2c | alpha_policy 0.07, alpha_value 0.22, gamma 0.99, temperature 0.95 | 2200 | 28.55 | 0.98 | `results/tuning/a2c_tune_01.json` |
+| 9 | a3c | alpha_policy 0.065, alpha_value 0.20, gamma 0.99, temperature 1.05 | 2200 | 26.84 | 0.95 | `results/tuning/a3c_tune_01.json` |

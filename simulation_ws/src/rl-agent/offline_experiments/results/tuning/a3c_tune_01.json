@@ -1,0 +1,35 @@
+{
+  "agent": "a3c",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 26.84,
+    "avg_steps": 20.41,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -40.0,
+    "success_rate": 0.95
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 20.937272727272727,
+    "avg_steps": 22.194545454545455,
+    "episodes": 2200.0,
+    "max_reward": 33.0,
+    "min_reward": -103.0,
+    "success_rate": 0.8931818181818182
+  }
+}
