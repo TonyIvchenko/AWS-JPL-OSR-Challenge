@@ -1,0 +1,35 @@
+{
+  "agent": "sac",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 29.86,
+    "avg_steps": 21.14,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": 24.0,
+    "success_rate": 1.0
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 23.005454545454544,
+    "avg_steps": 23.003636363636364,
+    "episodes": 2200.0,
+    "max_reward": 33.0,
+    "min_reward": -104.0,
+    "success_rate": 0.9318181818181818
+  }
+}
