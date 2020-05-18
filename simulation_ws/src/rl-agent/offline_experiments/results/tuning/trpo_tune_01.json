@@ -1,0 +1,35 @@
+{
+  "agent": "trpo",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": -28.41,
+    "avg_steps": 4.41,
+    "episodes": 100.0,
+    "max_reward": -28.0,
+    "min_reward": -31.0,
+    "success_rate": 0.0
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": -30.742333333333335,
+    "avg_steps": 6.757333333333333,
+    "episodes": 3000.0,
+    "max_reward": -28.0,
+    "min_reward": -93.0,
+    "success_rate": 0.0
+  }
+}
