@@ -16,3 +16,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 10 | ppo | alpha_policy 0.055, alpha_value 0.18, gamma 0.995, temperature 0.90 | 2200 | 26.01 | 0.94 | `results/tuning/ppo_tune_01.json` |
 | 11 | trpo | alpha 0.012, gamma 0.995, temperature 0.85 | 3000 | -28.41 | 0.00 | `results/tuning/trpo_tune_01.json` |
 | 12 | sac | alpha_policy 0.085, alpha_value 0.16, gamma 0.995, temperature 1.15 | 2200 | 29.86 | 1.00 | `results/tuning/sac_tune_01.json` |
+| 13 | ddpg | alpha 0.18, epsilon 0.14->0.005, decay 0.99975, replay 7000, batch 56, target sync 140 | 1700 | 24.22 | 0.92 | `results/tuning/ddpg_tune_01.json` |
