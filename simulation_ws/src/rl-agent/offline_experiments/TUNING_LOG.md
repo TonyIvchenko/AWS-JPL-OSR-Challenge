@@ -19,3 +19,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 13 | ddpg | alpha 0.18, epsilon 0.14->0.005, decay 0.99975, replay 7000, batch 56, target sync 140 | 1700 | 24.22 | 0.92 | `results/tuning/ddpg_tune_01.json` |
 | 14 | td3 | alpha 0.16, epsilon 0.16->0.01, decay 0.9997, replay 7500, batch 56, target sync 130 | 1700 | -5.70 | 0.84 | `results/tuning/td3_tune_01.json` |
 | 15 | impala | alpha_policy 0.070, alpha_value 0.21, gamma 0.995, temperature 0.98 | 2200 | 22.24 | 0.89 | `results/tuning/impala_tune_01.json` |
+| 16 | r2d2 | alpha 0.15, epsilon 0.22->0.01, decay 0.99975, replay 9000, batch 72, target sync 200 | 1700 | 15.13 | 0.83 | `results/tuning/r2d2_tune_01.json` |
