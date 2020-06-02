@@ -31,7 +31,7 @@ TRAINING_IMAGE_HEIGHT = 120
 TRAINING_IMAGE_SIZE = (TRAINING_IMAGE_WIDTH, TRAINING_IMAGE_HEIGHT)
 
 LIDAR_SCAN_MAX_DISTANCE = 4.5  # Max distance Lidar scanner can measure
-CRASH_DISTANCE = 0.49  # Min distance to obstacle (The LIDAR is in the center of the 1M Rover)
+CRASH_DISTANCE = 0.8  # Min distance to obstacle (The LIDAR is in the center of the 1M Rover)
 
 # Size of the image queue buffer, we want this to be one so that we consume 1 image
 # at a time, but may want to change this as we add more algorithms
@@ -41,7 +41,7 @@ IMG_QUEUE_BUF_SIZE = 1
 MAX_STEPS = 2000
 
 # Destination Point
-CHECKPOINT_X = 44.25
+CHECKPOINT_X = -44.25
 CHECKPOINT_Y = -4
 
 # Initial position of the robot
@@ -81,6 +81,8 @@ class MarsEnv(gym.Env):
         self.collision = False                                                  # Episodic collision detector
         self.distance_travelled = 0                                             # Global episodic distance counter
         self.current_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT    # current distance to checkpoint
+        self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+        self.distance = 0                                                       # Distance traveled since last step
         self.closer_to_checkpoint = False                                       # Was last step closer to checkpoint?
         self.state = None                                                       # Observation space
         self.steering = 0
@@ -320,7 +322,7 @@ class MarsEnv(gym.Env):
 
         # Get average Imu reading
         if self.max_lin_accel_x > 0 or self.max_lin_accel_y > 0 or self.max_lin_accel_z > 0:
-            avg_imu = (self.max_lin_accel_x + self.max_lin_accel_y + self.max_lin_accel_y) / 3
+            avg_imu = (self.max_lin_accel_x + self.max_lin_accel_y + self.max_lin_accel_z) / 3
         else:
             avg_imu = 0
     
@@ -363,11 +365,12 @@ class MarsEnv(gym.Env):
         
         GUIDERAILS_X_MIN = -46
         GUIDERAILS_X_MAX = 1
-        GUIDERAILS_Y_MIN = -6
-        GUIDERAILS_Y_MAX = 4
+        GUIDERAILS_Y_MIN = -14
+        GUIDERAILS_Y_MAX = 8
         
         
         # WayPoints to checkpoint
+        '''
         WAYPOINT_1_X = -10
         WAYPOINT_1_Y = -4
         
@@ -382,12 +385,13 @@ class MarsEnv(gym.Env):
         WAYPOINT_1_REWARD = 1000
         WAYPOINT_2_REWARD = 2000
         WAYPOINT_3_REWARD = 3000
-
-        reward = 0
+        
         base_reward = 2
         multiplier = 0
         done = False
+        '''
         
+        reward = 0
         
         if self.steps > 0:
             
@@ -397,105 +401,76 @@ class MarsEnv(gym.Env):
             # Has LIDAR registered a hit
             if self.collision_threshold <= CRASH_DISTANCE:
                 print("Rover has sustained sideswipe damage")
+                self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+                self.distance = 0
                 return 0, True # No reward
             
             # Have the gravity sensors registered too much G-force
             if self.collision:
                 print("Rover has collided with an object")
+                self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+                self.distance = 0
                 return 0, True # No reward
             
             # Has the rover reached the max steps
             if self.power_supply_range < 1:
                 print("Rover's power supply has been drained (MAX Steps reached")
+                self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+                self.distance = 0
                 return 0, True # No reward
             
             # Has the Rover reached the destination
-            if self.last_position_x >= CHECKPOINT_X and self.last_position_y >= CHECKPOINT_Y:
+            if math.hypot(self.last_position_x - CHECKPOINT_X, self.last_position_y - CHECKPOINT_Y) <= 1.0:
                 print("Congratulations! The rover has reached the checkpoint!")
-                multiplier = FINISHED_REWARD
-                reward = (base_reward * multiplier) / self.steps # <-- incentivize to reach checkpoint in fewest steps
+                reward = 10000 * INITIAL_DISTANCE_TO_CHECKPOINT / self.steps # <-- incentivize to reach checkpoint in fewest steps
+                self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+                self.distance = 0
                 return reward, True
             
             # If it has not reached the check point is it still on the map?
             if self.x < (GUIDERAILS_X_MIN - .45) or self.x > (GUIDERAILS_X_MAX + .45):
                 print("Rover has left the mission map!")
+                self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+                self.distance = 0
                 return 0, True
                 
                 
             if self.y < (GUIDERAILS_Y_MIN - .45) or self.y > (GUIDERAILS_Y_MAX + .45):
                 print("Rover has left the mission map!")
+                self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+                self.distance = 0
                 return 0, True
             
+            # Distance travelled since last step
+            self.distance = math.hypot(self.x - self.last_position_x, self.y - self.last_position_y) 
             
-            # No Episode ending events - continue to calculate reward
+            # Got stuck because of unknown reason
+            if self.steps > 10 and self.distance < 0.02:
+                print("Rover got stuck")
+                self.last_distance_to_checkpoint = INITIAL_DISTANCE_TO_CHECKPOINT
+                self.distance = 0
+                return 0, True
             
-            if self.last_position_x <= WAYPOINT_1_X and self.last_position_y <= WAYPOINT_1_Y: # Rover is past the midpoint
-                # Determine if Rover already received one time reward for reaching this waypoint
-                if not self.reached_waypoint_1:  
-                    self.reached_waypoint_1 = True
-                    print("Congratulations! The rover has reached waypoint 1!")
-                    multiplier = 1 
-                    reward = (WAYPOINT_1_REWARD * multiplier)/ self.steps # <-- incentivize to reach way-point in fewest steps
-                    return reward, False
+            # Distance to objects: (1 - 0), higher is better
+            x0 = self.collision_threshold / LIDAR_SCAN_MAX_DISTANCE
             
-            if self.last_position_x <= WAYPOINT_2_X and self.last_position_y >= WAYPOINT_2_Y: # Rover is past the midpoint
-                # Determine if Rover already received one time reward for reaching this waypoint
-                if not self.reached_waypoint_2:  
-                    self.reached_waypoint_2 = True
-                    print("Congratulations! The rover has reached waypoint 2!")
-                    multiplier = 1 
-                    reward = (WAYPOINT_2_REWARD * multiplier)/ self.steps # <-- incentivize to reach way-point in fewest steps
-                    return reward, False
-                    
-            if self.last_position_x <= WAYPOINT_3_X and self.last_position_y >= WAYPOINT_3_Y: # Rover is past the midpoint
-                # Determine if Rover already received one time reward for reaching this waypoint
-                if not self.reached_waypoint_3:  
-                    self.reached_waypoint_3 = True
-                    print("Congratulations! The rover has reached waypoint 3!")
-                    multiplier = 1 
-                    reward = (WAYPOINT_3_REWARD * multiplier)/ self.steps # <-- incentivize to reach way-point in fewest steps
-                    return reward, False
-                    
+            # Power left: (1 - 0), higher is better
+            x1 = self.power_supply_range / MAX_STEPS                                                  
             
-            # To reach this point in the function the Rover has either not yet reached the way-points OR has already gotten the one time reward for reaching the waypoint(s)
-               
-            # multiply the reward based on the Rover's proximity to the Checkpoint
-            waypoint_interval = INITIAL_DISTANCE_TO_CHECKPOINT / 5 
-           
-            marker = [waypoint_interval,(waypoint_interval * 2),(waypoint_interval * 3),(waypoint_interval * 4)]
-                
-            # Get the Base multiplier
-            if self.current_distance_to_checkpoint <= marker[0]:
-                multiplier = 5
-            elif self.current_distance_to_checkpoint <= marker[1] and self.current_distance_to_checkpoint > marker[0]:
-                multiplier = 4
-            elif self.current_distance_to_checkpoint <= marker[2] and self.current_distance_to_checkpoint > marker[1]:
-                multiplier = 3
-            elif self.current_distance_to_checkpoint <= marker[3] and self.current_distance_to_checkpoint > marker[2]:
-                multiplier = 2
-            else:
-                multiplier = 1
+            # Direction and optimal trajectory: (1 - -1), higher is better
+            x2 = (self.last_distance_to_checkpoint - self.current_distance_to_checkpoint )  / self.distance
             
-            # Incentivize the rover to stay away from objects
-            if self.collision_threshold >= 2.0:      # very safe distance
-                multiplier = multiplier + 1
-            elif self.collision_threshold < 2.0 and self.collision_threshold >= 1.5: # pretty safe
-                multiplier = multiplier + .5
-            elif self.collision_threshold < 1.5 and self.collision_threshold >= 1.0: # just enough time to turn
-                multiplier = multiplier + .25
-            else:
-                multiplier = multiplier # probably going to hit something and get a zero reward
+            # Distance to checkpoint multiplier (closer to checkpoint - higher ratio)
+            x3 = INITIAL_DISTANCE_TO_CHECKPOINT / ( self.current_distance_to_checkpoint + 1 )
             
-            # Incentize the rover to move towards the Checkpoint and not away from the checkpoint
-            if not self.closer_to_checkpoint:
-                if multiplier > 0:
-                    # Cut the multiplier in half
-                    multiplier = multiplier/2
-                    
-            reward = base_reward * multiplier
+            # Reversed average maximum IMU acceleration, higher is better
+            x4 = 30 / (self.max_lin_accel_x + self.max_lin_accel_y + self.max_lin_accel_z)
+
+            reward = x0 * x1 * x2 * x3 * x4
             
+        self.last_distance_to_checkpoint = self.current_distance_to_checkpoint
         
-        return reward, done
+        return reward, False
     
         
     '''
@@ -522,8 +497,8 @@ class MarsEnv(gym.Env):
     '''
     def callback_wheel_lb(self, data):
         lin_accel_x = data.linear_acceleration.x
-        lin_accel_y = data.linear_acceleration.x
-        lin_accel_z = data.linear_acceleration.x
+        lin_accel_y = data.linear_acceleration.y
+        lin_accel_z = data.linear_acceleration.z
 
         if lin_accel_x > self.max_lin_accel_x:
             self.max_lin_accel_x = lin_accel_x
@@ -580,7 +555,7 @@ class MarsEnv(gym.Env):
         # Listen for a collision with anything in the environment
         collsion_states = data.states
         if len(collsion_states) > 0:
-            self.collide = True
+            self.collision = True
 
     
     '''
