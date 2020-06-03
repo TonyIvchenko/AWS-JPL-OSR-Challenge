@@ -907,13 +907,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.16,
-            epsilon_start=0.5,
-            epsilon_end=0.05,
-            epsilon_decay=0.9993,
-            replay_capacity=7000,
-            batch_size=56,
-            target_update_steps=220,
+            alpha=0.18,
+            epsilon_start=0.42,
+            epsilon_end=0.03,
+            epsilon_decay=0.99945,
+            replay_capacity=8500,
+            batch_size=64,
+            target_update_steps=180,
         )
     if agent_name == "apex_dqn":
         return DoubleDQNAgent(
