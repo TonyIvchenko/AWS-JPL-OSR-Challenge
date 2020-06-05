@@ -706,6 +706,10 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
+            alpha_policy=0.09,
+            alpha_value=0.17,
+            gamma=0.99,
+            temperature=0.92,
         )
     if agent_name == "reinforce":
         return ReinforceAgent(
