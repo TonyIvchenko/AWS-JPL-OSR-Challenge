@@ -23,3 +23,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 17 | bootstrapped_dqn | alpha 0.18, epsilon 0.42->0.03, decay 0.99945, replay 8500, batch 64, target sync 180 | 1700 | 21.05 | 0.86 | `results/tuning/bootstrapped_dqn_tune_01.json` |
 | 18 | apex_dqn | alpha 0.20, epsilon 0.35->0.02, decay 0.9996, replay 10000, batch 72, target sync 120 | 1700 | -7.03 | 0.83 | `results/tuning/apex_dqn_tune_01.json` |
 | 19 | actor_critic | alpha_policy 0.09, alpha_value 0.17, gamma 0.99, temperature 0.92 | 2200 | 28.51 | 0.98 | `results/tuning/actor_critic_tune_01.json` |
+| 20 | reinforce | alpha 0.018, gamma 0.99, temperature 0.88 | 3000 | -28.65 | 0.00 | `results/tuning/reinforce_tune_01.json` |
