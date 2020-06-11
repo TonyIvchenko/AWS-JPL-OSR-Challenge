@@ -725,13 +725,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.16,
-            epsilon_start=0.28,
-            epsilon_end=0.02,
-            epsilon_decay=0.99965,
-            replay_capacity=5000,
-            batch_size=48,
-            target_update_steps=170,
+            alpha=0.17,
+            epsilon_start=0.24,
+            epsilon_end=0.01,
+            epsilon_decay=0.99972,
+            replay_capacity=6500,
+            batch_size=56,
+            target_update_steps=150,
         )
     if agent_name == "double_dqn":
         return DoubleDQNAgent(
