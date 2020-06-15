@@ -751,13 +751,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.17,
-            epsilon_start=0.22,
-            epsilon_end=0.02,
-            epsilon_decay=0.99955,
-            replay_capacity=5500,
-            batch_size=52,
-            target_update_steps=140,
+            alpha=0.15,
+            epsilon_start=0.20,
+            epsilon_end=0.015,
+            epsilon_decay=0.99960,
+            replay_capacity=6000,
+            batch_size=56,
+            target_update_steps=130,
         )
     if agent_name == "noisy_dqn":
         return DQNAgent(
