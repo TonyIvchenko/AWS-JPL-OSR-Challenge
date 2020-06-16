@@ -1,0 +1,35 @@
+{
+  "agent": "c51",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 21.15,
+    "avg_steps": 19.35,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -41.0,
+    "success_rate": 0.86
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 15.54,
+    "avg_steps": 23.66,
+    "episodes": 1800.0,
+    "max_reward": 33.0,
+    "min_reward": -100.0,
+    "success_rate": 0.8416666666666667
+  }
+}
