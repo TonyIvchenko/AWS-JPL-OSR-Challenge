@@ -764,13 +764,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.20,
-            epsilon_start=0.50,
-            epsilon_end=0.06,
-            epsilon_decay=0.99935,
-            replay_capacity=6500,
-            batch_size=56,
-            target_update_steps=110,
+            alpha=0.19,
+            epsilon_start=0.55,
+            epsilon_end=0.05,
+            epsilon_decay=0.99940,
+            replay_capacity=7000,
+            batch_size=64,
+            target_update_steps=100,
         )
     if agent_name == "c51":
         return DQNAgent(
