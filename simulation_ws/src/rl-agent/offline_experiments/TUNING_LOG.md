@@ -30,3 +30,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 24 | noisy_dqn | alpha 0.19, epsilon 0.55->0.05, decay 0.99940, replay 7000, batch 64, target sync 100 | 1700 | -3.67 | 0.75 | `results/tuning/noisy_dqn_tune_02.json` |
 | 25 | c51 | alpha 0.13, epsilon 0.22->0.01, decay 0.99970, replay 7000, batch 64, target sync 160 | 1800 | 21.15 | 0.86 | `results/tuning/c51_tune_02.json` |
 | 26 | qr_dqn | alpha 0.17, epsilon 0.24->0.015, decay 0.99965, replay 8000, batch 64, target sync 150 | 1800 | 26.43 | 0.98 | `results/tuning/qr_dqn_tune_02.json` |
+| 27 | iqn | alpha 0.14, epsilon 0.20->0.01, decay 0.99970, replay 8000, batch 64, target sync 160 | 1800 | 26.36 | 0.99 | `results/tuning/iqn_tune_02.json` |
