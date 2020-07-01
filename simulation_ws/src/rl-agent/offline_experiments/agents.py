@@ -826,10 +826,10 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha_policy=0.065,
-            alpha_value=0.20,
-            gamma=0.99,
-            temperature=1.05,
+            alpha_policy=0.070,
+            alpha_value=0.19,
+            gamma=0.995,
+            temperature=1.00,
         )
     if agent_name == "ppo":
         return ActorCriticAgent(
