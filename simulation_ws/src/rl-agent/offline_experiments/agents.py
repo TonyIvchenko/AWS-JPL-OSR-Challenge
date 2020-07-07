@@ -855,10 +855,10 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha_policy=0.085,
-            alpha_value=0.16,
-            gamma=0.995,
-            temperature=1.15,
+            alpha_policy=0.090,
+            alpha_value=0.15,
+            gamma=0.997,
+            temperature=1.05,
         )
     if agent_name == "ddpg":
         return DQNAgent(
