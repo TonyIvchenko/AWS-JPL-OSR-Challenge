@@ -1,0 +1,35 @@
+{
+  "agent": "ppo",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 27.38,
+    "avg_steps": 22.87,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -33.0,
+    "success_rate": 0.99
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 21.363333333333333,
+    "avg_steps": 24.561666666666667,
+    "episodes": 2400.0,
+    "max_reward": 33.0,
+    "min_reward": -104.0,
+    "success_rate": 0.9308333333333333
+  }
+}
