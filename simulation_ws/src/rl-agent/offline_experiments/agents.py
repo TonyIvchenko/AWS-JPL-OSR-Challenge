@@ -878,13 +878,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.16,
-            epsilon_start=0.16,
-            epsilon_end=0.01,
-            epsilon_decay=0.9997,
-            replay_capacity=7500,
-            batch_size=56,
-            target_update_steps=130,
+            alpha=0.15,
+            epsilon_start=0.14,
+            epsilon_end=0.005,
+            epsilon_decay=0.99975,
+            replay_capacity=8500,
+            batch_size=64,
+            target_update_steps=110,
         )
     if agent_name == "impala":
         return ActorCriticAgent(
