@@ -865,13 +865,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.18,
-            epsilon_start=0.14,
-            epsilon_end=0.005,
-            epsilon_decay=0.99975,
-            replay_capacity=7000,
-            batch_size=56,
-            target_update_steps=140,
+            alpha=0.16,
+            epsilon_start=0.12,
+            epsilon_end=0.003,
+            epsilon_decay=0.99980,
+            replay_capacity=8000,
+            batch_size=64,
+            target_update_steps=120,
         )
     if agent_name == "td3":
         return DoubleDQNAgent(
