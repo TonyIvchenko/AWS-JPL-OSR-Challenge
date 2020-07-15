@@ -901,13 +901,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.15,
-            epsilon_start=0.22,
-            epsilon_end=0.01,
-            epsilon_decay=0.99975,
-            replay_capacity=9000,
-            batch_size=72,
-            target_update_steps=200,
+            alpha=0.14,
+            epsilon_start=0.20,
+            epsilon_end=0.005,
+            epsilon_decay=0.99980,
+            replay_capacity=10000,
+            batch_size=80,
+            target_update_steps=170,
         )
     if agent_name == "bootstrapped_dqn":
         return DQNAgent(
