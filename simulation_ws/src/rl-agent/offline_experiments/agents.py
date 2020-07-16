@@ -927,13 +927,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.20,
-            epsilon_start=0.35,
-            epsilon_end=0.02,
-            epsilon_decay=0.9996,
-            replay_capacity=10000,
-            batch_size=72,
-            target_update_steps=120,
+            alpha=0.18,
+            epsilon_start=0.30,
+            epsilon_end=0.015,
+            epsilon_decay=0.99965,
+            replay_capacity=12000,
+            batch_size=80,
+            target_update_steps=100,
         )
 
     raise ValueError(f"Unknown agent '{agent_name}'")

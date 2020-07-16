@@ -1,0 +1,35 @@
+{
+  "agent": "apex_dqn",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 27.54,
+    "avg_steps": 20.46,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -36.0,
+    "success_rate": 0.96
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 19.179444444444446,
+    "avg_steps": 23.470555555555556,
+    "episodes": 1800.0,
+    "max_reward": 33.0,
+    "min_reward": -104.0,
+    "success_rate": 0.8877777777777778
+  }
+}
