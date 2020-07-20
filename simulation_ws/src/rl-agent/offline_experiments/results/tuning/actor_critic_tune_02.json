@@ -1,0 +1,35 @@
+{
+  "agent": "actor_critic",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 26.18,
+    "avg_steps": 20.32,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -44.0,
+    "success_rate": 0.94
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 20.573333333333334,
+    "avg_steps": 21.645416666666666,
+    "episodes": 2400.0,
+    "max_reward": 33.0,
+    "min_reward": -101.0,
+    "success_rate": 0.8816666666666667
+  }
+}

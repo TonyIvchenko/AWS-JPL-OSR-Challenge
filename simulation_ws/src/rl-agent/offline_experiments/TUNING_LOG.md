@@ -42,3 +42,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 36 | r2d2 | alpha 0.14, epsilon 0.20->0.005, decay 0.99980, replay 10000, batch 80, target sync 170 | 1800 | 24.49 | 0.91 | `results/tuning/r2d2_tune_02.json` |
 | 37 | bootstrapped_dqn | alpha 0.17, epsilon 0.36->0.02, decay 0.99955, replay 9000, batch 72, target sync 160 | 1800 | 23.23 | 0.89 | `results/tuning/bootstrapped_dqn_tune_02.json` |
 | 38 | apex_dqn | alpha 0.18, epsilon 0.30->0.015, decay 0.99965, replay 12000, batch 80, target sync 100 | 1800 | 27.54 | 0.96 | `results/tuning/apex_dqn_tune_02.json` |
+| 39 | actor_critic | alpha_policy 0.085, alpha_value 0.18, gamma 0.995, temperature 0.88 | 2400 | 26.18 | 0.94 | `results/tuning/actor_critic_tune_02.json` |
