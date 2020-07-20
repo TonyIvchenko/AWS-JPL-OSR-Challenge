@@ -716,9 +716,9 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.018,
-            gamma=0.99,
-            temperature=0.88,
+            alpha=0.015,
+            gamma=0.995,
+            temperature=0.82,
         )
     if agent_name == "dqn":
         return DQNAgent(
