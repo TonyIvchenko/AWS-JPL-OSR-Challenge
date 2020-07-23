@@ -46,3 +46,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 40 | reinforce | alpha 0.015, gamma 0.995, temperature 0.82 | 3200 | -28.79 | 0.00 | `results/tuning/reinforce_tune_02.json` |
 | 41 | dqn | alpha 0.16, epsilon 0.21->0.008, decay 0.99976, replay 7000, batch 64, target sync 135 | 1900 | 21.34 | 0.88 | `results/tuning/dqn_tune_03.json` |
 | 42 | double_dqn | alpha 0.17, epsilon 0.23->0.008, decay 0.99972, replay 8000, batch 72, target sync 125 | 1900 | 27.37 | 0.97 | `results/tuning/double_dqn_tune_03.json` |
+| 43 | dueling_dqn | alpha 0.14, epsilon 0.18->0.01, decay 0.99965, replay 6500, batch 64, target sync 120 | 1800 | 21.69 | 0.86 | `results/tuning/dueling_dqn_tune_03.json` |
