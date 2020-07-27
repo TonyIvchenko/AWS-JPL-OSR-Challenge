@@ -790,13 +790,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.17,
-            epsilon_start=0.24,
-            epsilon_end=0.015,
-            epsilon_decay=0.99965,
-            replay_capacity=8000,
-            batch_size=64,
-            target_update_steps=150,
+            alpha=0.16,
+            epsilon_start=0.22,
+            epsilon_end=0.01,
+            epsilon_decay=0.99970,
+            replay_capacity=9000,
+            batch_size=72,
+            target_update_steps=135,
         )
     if agent_name == "iqn":
         return DoubleDQNAgent(
