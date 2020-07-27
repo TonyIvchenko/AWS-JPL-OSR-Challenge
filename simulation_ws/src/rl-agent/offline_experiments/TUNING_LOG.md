@@ -48,3 +48,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 42 | double_dqn | alpha 0.17, epsilon 0.23->0.008, decay 0.99972, replay 8000, batch 72, target sync 125 | 1900 | 27.37 | 0.97 | `results/tuning/double_dqn_tune_03.json` |
 | 43 | dueling_dqn | alpha 0.14, epsilon 0.18->0.01, decay 0.99965, replay 6500, batch 64, target sync 120 | 1800 | 21.69 | 0.86 | `results/tuning/dueling_dqn_tune_03.json` |
 | 44 | noisy_dqn | alpha 0.18, epsilon 0.48->0.04, decay 0.99948, replay 7500, batch 72, target sync 90 | 1800 | 19.81 | 0.84 | `results/tuning/noisy_dqn_tune_03.json` |
+| 45 | c51 | alpha 0.12, epsilon 0.20->0.008, decay 0.99974, replay 7500, batch 72, target sync 145 | 1900 | -32.09 | 0.40 | `results/tuning/c51_tune_03.json` |
