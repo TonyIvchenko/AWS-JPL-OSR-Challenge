@@ -803,13 +803,13 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.14,
-            epsilon_start=0.20,
-            epsilon_end=0.01,
-            epsilon_decay=0.99970,
-            replay_capacity=8000,
-            batch_size=64,
-            target_update_steps=160,
+            alpha=0.13,
+            epsilon_start=0.18,
+            epsilon_end=0.008,
+            epsilon_decay=0.99975,
+            replay_capacity=9000,
+            batch_size=72,
+            target_update_steps=145,
         )
     if agent_name == "a2c":
         return ActorCriticAgent(
