@@ -1,0 +1,35 @@
+{
+  "agent": "a2c",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 30.2,
+    "avg_steps": 20.8,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": 21.0,
+    "success_rate": 1.0
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 23.7076,
+    "avg_steps": 22.3244,
+    "episodes": 2500.0,
+    "max_reward": 33.0,
+    "min_reward": -102.0,
+    "success_rate": 0.932
+  }
+}

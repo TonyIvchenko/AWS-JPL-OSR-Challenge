@@ -51,3 +51,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 45 | c51 | alpha 0.12, epsilon 0.20->0.008, decay 0.99974, replay 7500, batch 72, target sync 145 | 1900 | -32.09 | 0.40 | `results/tuning/c51_tune_03.json` |
 | 46 | qr_dqn | alpha 0.16, epsilon 0.22->0.01, decay 0.99970, replay 9000, batch 72, target sync 135 | 1900 | 20.87 | 0.87 | `results/tuning/qr_dqn_tune_03.json` |
 | 47 | iqn | alpha 0.13, epsilon 0.18->0.008, decay 0.99975, replay 9000, batch 72, target sync 145 | 1900 | 27.27 | 0.98 | `results/tuning/iqn_tune_03.json` |
+| 48 | a2c | alpha_policy 0.075, alpha_value 0.21, gamma 0.997, temperature 0.88 | 2500 | 30.20 | 1.00 | `results/tuning/a2c_tune_03.json` |
