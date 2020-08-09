@@ -53,3 +53,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 47 | iqn | alpha 0.13, epsilon 0.18->0.008, decay 0.99975, replay 9000, batch 72, target sync 145 | 1900 | 27.27 | 0.98 | `results/tuning/iqn_tune_03.json` |
 | 48 | a2c | alpha_policy 0.075, alpha_value 0.21, gamma 0.997, temperature 0.88 | 2500 | 30.20 | 1.00 | `results/tuning/a2c_tune_03.json` |
 | 49 | a3c | alpha_policy 0.068, alpha_value 0.20, gamma 0.997, temperature 0.96 | 2500 | 19.14 | 0.83 | `results/tuning/a3c_tune_03.json` |
+| 50 | ppo | alpha_policy 0.048, alpha_value 0.21, gamma 0.997, temperature 0.82 | 2500 | 22.44 | 0.88 | `results/tuning/ppo_tune_03.json` |
