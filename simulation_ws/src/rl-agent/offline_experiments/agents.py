@@ -846,9 +846,9 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha=0.010,
-            gamma=0.997,
-            temperature=0.80,
+            alpha=0.009,
+            gamma=0.998,
+            temperature=0.78,
         )
     if agent_name == "sac":
         return ActorCriticAgent(
