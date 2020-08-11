@@ -1,0 +1,35 @@
+{
+  "agent": "ddpg",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": 28.81,
+    "avg_steps": 19.94,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -39.0,
+    "success_rate": 0.97
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 19.66263157894737,
+    "avg_steps": 22.187368421052632,
+    "episodes": 1900.0,
+    "max_reward": 33.0,
+    "min_reward": -94.0,
+    "success_rate": 0.8773684210526316
+  }
+}
