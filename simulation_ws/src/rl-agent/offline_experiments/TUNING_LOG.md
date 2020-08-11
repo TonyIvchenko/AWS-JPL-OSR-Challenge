@@ -55,3 +55,4 @@ This log tracks iterative hyperparameter changes for existing model profiles in 
 | 49 | a3c | alpha_policy 0.068, alpha_value 0.20, gamma 0.997, temperature 0.96 | 2500 | 19.14 | 0.83 | `results/tuning/a3c_tune_03.json` |
 | 50 | ppo | alpha_policy 0.048, alpha_value 0.21, gamma 0.997, temperature 0.82 | 2500 | 22.44 | 0.88 | `results/tuning/ppo_tune_03.json` |
 | 51 | trpo | alpha 0.009, gamma 0.998, temperature 0.78 | 3400 | -28.78 | 0.00 | `results/tuning/trpo_tune_03.json` |
+| 52 | sac | alpha_policy 0.088, alpha_value 0.16, gamma 0.998, temperature 1.00 | 2500 | 29.01 | 0.98 | `results/tuning/sac_tune_03.json` |
