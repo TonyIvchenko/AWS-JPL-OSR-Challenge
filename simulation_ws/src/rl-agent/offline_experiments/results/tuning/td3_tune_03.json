@@ -1,0 +1,35 @@
+{
+  "agent": "td3",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": -4.01,
+    "avg_steps": 45.41,
+    "episodes": 100.0,
+    "max_reward": 33.0,
+    "min_reward": -93.0,
+    "success_rate": 0.85
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": 23.23,
+    "avg_steps": 22.03842105263158,
+    "episodes": 1900.0,
+    "max_reward": 33.0,
+    "min_reward": -103.0,
+    "success_rate": 0.9231578947368421
+  }
+}
