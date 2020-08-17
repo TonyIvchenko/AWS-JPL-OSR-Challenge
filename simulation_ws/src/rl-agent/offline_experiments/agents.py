@@ -891,10 +891,10 @@ def build_agent(
             num_states=num_states,
             num_actions=num_actions,
             seed=seed,
-            alpha_policy=0.072,
-            alpha_value=0.22,
-            gamma=0.995,
-            temperature=0.95,
+            alpha_policy=0.070,
+            alpha_value=0.23,
+            gamma=0.997,
+            temperature=0.92,
         )
     if agent_name == "r2d2":
         return DQNAgent(
