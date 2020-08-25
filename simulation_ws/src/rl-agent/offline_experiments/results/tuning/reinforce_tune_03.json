@@ -1,0 +1,35 @@
+{
+  "agent": "reinforce",
+  "environment": {
+    "goal": [
+      9,
+      9
+    ],
+    "height": 10,
+    "max_steps": 80,
+    "obstacle_count": 9,
+    "slip_probability": 0.1,
+    "start": [
+      0,
+      0
+    ],
+    "width": 10
+  },
+  "eval": {
+    "avg_reward": -29.31,
+    "avg_steps": 5.31,
+    "episodes": 100.0,
+    "max_reward": -28.0,
+    "min_reward": -33.0,
+    "success_rate": 0.0
+  },
+  "seed": 7,
+  "train": {
+    "avg_reward": -31.06970588235294,
+    "avg_steps": 7.12264705882353,
+    "episodes": 3400.0,
+    "max_reward": -1.0,
+    "min_reward": -95.0,
+    "success_rate": 0.0002941176470588235
+  }
+}
